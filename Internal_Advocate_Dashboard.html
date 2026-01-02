@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Internal Advocate Dashboard</title>
+<meta name="description" content="Internal control dashboard for GST & Tax Advocate. Track filings, notices, and compliance safely.">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary:#0b2d4d;
+  --accent:#c8a94a;
+  --bg:#ffffff;
+  --soft:#f7f8fa;
+  --text:#1a1a1a;
+  --muted:#5f6b77;
+}
+
+* { box-sizing:border-box; margin:0; padding:0; }
+
+body {
+  font-family:'Inter', sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.7;
+}
+
+h1,h2,h3 {
+  font-family:'Merriweather', serif;
+  color:var(--primary);
+}
+
+.container {
+  max-width:1100px;
+  margin:auto;
+  padding:0 20px;
+}
+
+/* ---------- HEADER ---------- */
+header {
+  padding:35px 0;
+  border-bottom:1px solid #e6e9ed;
+}
+
+.brand {
+  font-size:1.4rem;
+  font-weight:700;
+}
+
+/* ---------- SECTION ---------- */
+.section {
+  padding:50px 0;
+}
+
+/* ---------- DASHBOARD GRID ---------- */
+.dashboard {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:25px;
+  margin-top:25px;
+}
+
+/* ---------- CARDS ---------- */
+.card {
+  background:white;
+  border:1px solid #e6e9ed;
+  border-radius:8px;
+  padding:22px;
+}
+
+.card h3 {
+  font-size:1.15rem;
+  margin-bottom:10px;
+}
+
+.card p {
+  color:var(--muted);
+  font-size:14px;
+  margin-bottom:12px;
+}
+
+.card ul {
+  padding-left:18px;
+  font-size:14px;
+}
+
+.card li {
+  margin-bottom:6px;
+}
+
+.status-good {
+  color:#1e7a3a;
+  font-weight:600;
+}
+
+.status-warn {
+  color:#9c6b00;
+  font-weight:600;
+}
+
+.status-risk {
+  color:#7a1d1d;
+  font-weight:600;
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  background:#f2f4f7;
+  padding:25px;
+  text-align:center;
+  font-size:14px;
+  color:#555;
+}
+
+/* ---------- MOBILE CTA ---------- */
+.sticky-cta {
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  display:flex;
+  background:white;
+  border-top:1px solid #ddd;
+}
+
+.sticky-cta a {
+  flex:1;
+  text-align:center;
+  padding:14px;
+  font-weight:600;
+  text-decoration:none;
+}
+
+.sticky-call { color:var(--primary); }
+.sticky-wa { background:var(--accent); color:#000; }
+
+@media(min-width:768px){
+  .sticky-cta { display:none; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <div class="brand">Internal Advocate Dashboard</div>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <h1>Practice Control Dashboard</h1>
+    <p style="color:var(--muted); max-width:800px;">
+      A single-screen overview to ensure nothing slips.
+      Review daily. Act early. Stay in control.
+    </p>
+
+    <div class="dashboard">
+
+      <!-- FILINGS -->
+      <div class="card">
+        <h3>Upcoming Filings</h3>
+        <p>Next 7–10 days critical actions</p>
+        <ul>
+          <li>ABC Traders — GSTR-3B — <span class="status-warn">Due in 3 days</span></li>
+          <li>XYZ Services — GSTR-1 — <span class="status-risk">Due Tomorrow</span></li>
+          <li>LMN Retail — CMP-08 — <span class="status-good">Filed</span></li>
+        </ul>
+      </div>
+
+      <!-- DELAYS -->
+      <div class="card">
+        <h3>Delayed / Missed</h3>
+        <p>Immediate attention required</p>
+        <ul>
+          <li>RST Enterprises — <span class="status-risk">GSTR-3B Pending</span></li>
+          <li>PQR Logistics — <span class="status-warn">Late Filing Risk</span></li>
+        </ul>
+      </div>
+
+      <!-- NOTICES -->
+      <div class="card">
+        <h3>Open Notices</h3>
+        <p>Cases requiring tracking</p>
+        <ul>
+          <li>DEF Pvt Ltd — ITC Mismatch — <span class="status-risk">Reply Due</span></li>
+          <li>JKL Store — Late Fee — <span class="status-warn">Under Review</span></li>
+        </ul>
+      </div>
+
+      <!-- CLIENT HEALTH -->
+      <div class="card">
+        <h3>Client Health Watch</h3>
+        <p>Risk-prone clients</p>
+        <ul>
+          <li>High ITC Ratio — 2 Clients</li>
+          <li>Irregular Filing — 4 Clients</li>
+          <li>New Registrations — 3 Clients</li>
+        </ul>
+      </div>
+
+      <!-- TEAM -->
+      <div class="card">
+        <h3>Team Allocation</h3>
+        <p>Responsibility clarity</p>
+        <ul>
+          <li>Rohit — Returns (12)</li>
+          <li>Anjali — Notices (5)</li>
+          <li>Neha — Registrations (4)</li>
+        </ul>
+      </div>
+
+      <!-- QUICK NOTES -->
+      <div class="card">
+        <h3>Today’s Focus</h3>
+        <p>Manual notes (daily discipline)</p>
+        <ul>
+          <li>Follow up ITC docs — DEF Pvt Ltd</li>
+          <li>Draft notice reply — XYZ Services</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2025 GST & Tax Advocate | Practice Control System
+</footer>
+
+<div class="sticky-cta">
+  <a href="tel:+919999999999" class="sticky-call">📞 Call</a>
+  <a href="https://wa.me/919999999999" class="sticky-wa">💬 WhatsApp</a>
+</div>
+
+</body>
+</html>
