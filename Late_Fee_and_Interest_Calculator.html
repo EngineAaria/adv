@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Late Fee & Interest Calculator</title>
+<meta name="description" content="Calculate GST late fees and interest transparently to avoid confusion and disputes.">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary:#0b2d4d;
+  --accent:#c8a94a;
+  --bg:#ffffff;
+  --soft:#f7f8fa;
+  --text:#1a1a1a;
+  --muted:#5f6b77;
+}
+
+* { box-sizing:border-box; margin:0; padding:0; }
+
+body {
+  font-family:'Inter', sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.7;
+}
+
+h1,h2 {
+  font-family:'Merriweather', serif;
+  color:var(--primary);
+}
+
+.container {
+  max-width:900px;
+  margin:auto;
+  padding:0 20px;
+}
+
+/* ---------- HEADER ---------- */
+header {
+  padding:35px 0;
+  border-bottom:1px solid #e6e9ed;
+}
+
+.brand {
+  font-size:1.4rem;
+  font-weight:700;
+}
+
+/* ---------- SECTION ---------- */
+.section {
+  padding:60px 0;
+}
+
+.intro p {
+  color:var(--muted);
+  max-width:720px;
+}
+
+/* ---------- CALCULATOR ---------- */
+.calc-box {
+  background:var(--soft);
+  padding:30px;
+  border-radius:10px;
+  margin-top:30px;
+}
+
+.field {
+  margin-bottom:18px;
+}
+
+label {
+  display:block;
+  font-weight:600;
+  margin-bottom:6px;
+}
+
+select, input {
+  width:100%;
+  padding:12px;
+  border:1px solid #ccd3da;
+  border-radius:6px;
+  font-size:15px;
+}
+
+button {
+  background:var(--primary);
+  color:white;
+  border:none;
+  padding:14px;
+  width:100%;
+  font-size:16px;
+  font-weight:600;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+/* ---------- RESULT ---------- */
+.result {
+  background:white;
+  border:1px solid #e6e9ed;
+  border-radius:8px;
+  padding:25px;
+  margin-top:25px;
+}
+
+.result-row {
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+.result-row strong {
+  color:var(--primary);
+}
+
+.note {
+  margin-top:15px;
+  font-size:14px;
+  color:var(--muted);
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  background:#f2f4f7;
+  padding:25px;
+  text-align:center;
+  font-size:14px;
+  color:#555;
+}
+
+/* ---------- MOBILE CTA ---------- */
+.sticky-cta {
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  display:flex;
+  background:white;
+  border-top:1px solid #ddd;
+}
+
+.sticky-cta a {
+  flex:1;
+  text-align:center;
+  padding:14px;
+  font-weight:600;
+  text-decoration:none;
+}
+
+.sticky-call { color:var(--primary); }
+.sticky-wa { background:var(--accent); color:#000; }
+
+@media(min-width:768px){
+  .sticky-cta { display:none; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <div class="brand">Late Fee & Interest Calculator</div>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container intro">
+    <h1>Late Fee & Interest Calculator</h1>
+    <p>
+      Calculate GST late fees and interest transparently.
+      This helps you understand charges clearly and avoid disputes.
+    </p>
+
+    <div class="calc-box">
+
+      <div class="field">
+        <label>Return Type</label>
+        <select id="returnType">
+          <option value="gstr3b">GSTR-3B</option>
+          <option value="gstr1">GSTR-1</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Days of Delay</label>
+        <input type="number" id="days" placeholder="Enter number of days delayed">
+      </div>
+
+      <div class="field">
+        <label>Tax Amount (for interest calculation)</label>
+        <input type="number" id="taxAmount" placeholder="Enter tax payable amount">
+      </div>
+
+      <button onclick="calculateLateFee()">Calculate</button>
+
+      <div id="result" class="result" style="display:none;">
+        <div class="result-row">
+          <span>Late Fee</span>
+          <strong>₹ <span id="lateFee"></span></strong>
+        </div>
+        <div class="result-row">
+          <span>Interest (18% p.a.)</span>
+          <strong>₹ <span id="interest"></span></strong>
+        </div>
+        <div class="result-row">
+          <span>Total Additional Amount</span>
+          <strong>₹ <span id="total"></span></strong>
+        </div>
+
+        <p class="note">
+          * Calculations are indicative. Actual amounts may vary as per GST portal.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2025 GST & Tax Advocate | Transparent & Fair Compliance
+</footer>
+
+<div class="sticky-cta">
+  <a href="tel:+919999999999" class="sticky-call">📞 Call</a>
+  <a href="https://wa.me/919999999999" class="sticky-wa">💬 WhatsApp</a>
+</div>
+
+<script>
+function calculateLateFee() {
+  const returnType = document.getElementById("returnType").value;
+  const days = parseInt(document.getElementById("days").value);
+  const taxAmount = parseFloat(document.getElementById("taxAmount").value);
+
+  if (isNaN(days) || isNaN(taxAmount)) {
+    alert("Please enter valid details.");
+    return;
+  }
+
+  let lateFeePerDay = returnType === "gstr3b" ? 50 : 200;
+  let maxLateFee = returnType === "gstr3b" ? 10000 : 10000;
+
+  let lateFee = Math.min(days * lateFeePerDay, maxLateFee);
+  let interest = (taxAmount * 0.18 * days) / 365;
+  let total = lateFee + interest;
+
+  document.getElementById("lateFee").innerText = lateFee.toFixed(2);
+  document.getElementById("interest").innerText = interest.toFixed(2);
+  document.getElementById("total").innerText = total.toFixed(2);
+
+  document.getElementById("result").style.display = "block";
+}
+</script>
+
+</body>
+</html>
