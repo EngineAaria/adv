@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Business Health Snapshot</title>
+<meta name="description" content="Get a simple snapshot of business health using GST data. Identify trends, risks, and opportunities.">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary:#0b2d4d;
+  --accent:#c8a94a;
+  --bg:#ffffff;
+  --soft:#f7f8fa;
+  --text:#1a1a1a;
+  --muted:#5f6b77;
+}
+
+* { box-sizing:border-box; margin:0; padding:0; }
+
+body {
+  font-family:'Inter', sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.7;
+}
+
+h1,h2,h3 {
+  font-family:'Merriweather', serif;
+  color:var(--primary);
+}
+
+.container {
+  max-width:950px;
+  margin:auto;
+  padding:0 20px;
+}
+
+/* ---------- HEADER ---------- */
+header {
+  padding:35px 0;
+  border-bottom:1px solid #e6e9ed;
+}
+
+.brand {
+  font-size:1.4rem;
+  font-weight:700;
+}
+
+/* ---------- SECTION ---------- */
+.section {
+  padding:60px 0;
+}
+
+.intro p {
+  color:var(--muted);
+  max-width:780px;
+}
+
+/* ---------- SNAPSHOT BOX ---------- */
+.snapshot-box {
+  background:var(--soft);
+  padding:30px;
+  border-radius:10px;
+  margin-top:30px;
+}
+
+.field {
+  margin-bottom:18px;
+}
+
+label {
+  display:block;
+  font-weight:600;
+  margin-bottom:6px;
+}
+
+input, select {
+  width:100%;
+  padding:12px;
+  border:1px solid #ccd3da;
+  border-radius:6px;
+  font-size:15px;
+}
+
+button {
+  background:var(--primary);
+  color:white;
+  border:none;
+  padding:14px;
+  width:100%;
+  font-size:16px;
+  font-weight:600;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+/* ---------- RESULT ---------- */
+.result {
+  background:white;
+  border:1px solid #e6e9ed;
+  border-radius:8px;
+  padding:25px;
+  margin-top:25px;
+}
+
+.metric {
+  display:flex;
+  justify-content:space-between;
+  padding:10px 0;
+  border-bottom:1px solid #eee;
+}
+
+.metric:last-child { border-bottom:none; }
+
+.metric strong {
+  color:var(--primary);
+}
+
+.insight {
+  margin-top:15px;
+  font-size:15px;
+  color:var(--muted);
+}
+
+.flag {
+  color:#7a1d1d;
+  font-weight:600;
+}
+
+.good {
+  color:#1e7a3a;
+  font-weight:600;
+}
+
+.note {
+  margin-top:15px;
+  font-size:14px;
+  color:var(--muted);
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  background:#f2f4f7;
+  padding:25px;
+  text-align:center;
+  font-size:14px;
+  color:#555;
+}
+
+/* ---------- MOBILE CTA ---------- */
+.sticky-cta {
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  display:flex;
+  background:white;
+  border-top:1px solid #ddd;
+}
+
+.sticky-cta a {
+  flex:1;
+  text-align:center;
+  padding:14px;
+  font-weight:600;
+  text-decoration:none;
+}
+
+.sticky-call { color:var(--primary); }
+.sticky-wa { background:var(--accent); color:#000; }
+
+@media(min-width:768px){
+  .sticky-cta { display:none; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <div class="brand">Business Health Snapshot</div>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container intro">
+    <h1>Business Health Snapshot</h1>
+    <p>
+      Enter basic GST figures to get a clear, high-level snapshot
+      of business performance and compliance health.
+    </p>
+
+    <div class="snapshot-box">
+
+      <div class="field">
+        <label>Monthly Turnover (₹)</label>
+        <input type="number" id="turnover" placeholder="Example: 500000">
+      </div>
+
+      <div class="field">
+        <label>GST Paid (₹)</label>
+        <input type="number" id="gstPaid" placeholder="Example: 90000">
+      </div>
+
+      <div class="field">
+        <label>ITC Claimed (₹)</label>
+        <input type="number" id="itc" placeholder="Example: 60000">
+      </div>
+
+      <div class="field">
+        <label>Filing Regularity</label>
+        <select id="filing">
+          <option value="">Select</option>
+          <option value="regular">Always On Time</option>
+          <option value="delayed">Sometimes Delayed</option>
+          <option value="irregular">Frequently Delayed</option>
+        </select>
+      </div>
+
+      <button onclick="generateSnapshot()">Generate Snapshot</button>
+
+      <div id="result" class="result" style="display:none;"></div>
+
+      <p class="note">
+        * Snapshot is indicative. Detailed analysis requires professional review.
+      </p>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2025 GST & Tax Advocate | Advisory Beyond Compliance
+</footer>
+
+<div class="sticky-cta">
+  <a href="tel:+919999999999" class="sticky-call">📞 Call</a>
+  <a href="https://wa.me/919999999999" class="sticky-wa">💬 WhatsApp</a>
+</div>
+
+<script>
+function generateSnapshot() {
+  const turnover = parseFloat(document.getElementById("turnover").value);
+  const gstPaid = parseFloat(document.getElementById("gstPaid").value);
+  const itc = parseFloat(document.getElementById("itc").value);
+  const filing = document.getElementById("filing").value;
+
+  if (isNaN(turnover) || isNaN(gstPaid) || isNaN(itc) || !filing) {
+    alert("Please enter all details.");
+    return;
+  }
+
+  const taxRatio = ((gstPaid - itc) / turnover) * 100;
+  let filingStatus = "";
+  let insight = "";
+
+  if (filing === "regular") {
+    filingStatus = "<span class='good'>Strong</span>";
+  } else if (filing === "delayed") {
+    filingStatus = "<span class='flag'>Needs Attention</span>";
+  } else {
+    filingStatus = "<span class='flag'>High Risk</span>";
+  }
+
+  if (taxRatio < 5) {
+    insight = "GST outflow appears efficient. ITC utilization seems healthy.";
+  } else if (taxRatio < 10) {
+    insight = "GST outflow is moderate. Periodic ITC review recommended.";
+  } else {
+    insight = "High GST outflow compared to turnover. Cost and ITC structure should be reviewed.";
+  }
+
+  const resultBox = document.getElementById("result");
+
+  resultBox.innerHTML = `
+    <h3>Snapshot Summary</h3>
+
+    <div class="metric">
+      <span>Net GST Outflow Ratio</span>
+      <strong>${taxRatio.toFixed(2)}%</strong>
+    </div>
+
+    <div class="metric">
+      <span>Compliance Discipline</span>
+      <strong>${filingStatus}</strong>
+    </div>
+
+    <p class="insight">${insight}</p>
+  `;
+
+  resultBox.style.display = "block";
+}
+</script>
+
+</body>
+</html>
