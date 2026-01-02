@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Personalised Compliance Calendar</title>
+<meta name="description" content="View your personalised GST and Tax compliance calendar based on your business type and filing pattern.">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary:#0b2d4d;
+  --accent:#c8a94a;
+  --bg:#ffffff;
+  --soft:#f7f8fa;
+  --text:#1a1a1a;
+  --muted:#5f6b77;
+}
+
+* { box-sizing:border-box; margin:0; padding:0; }
+
+body {
+  font-family:'Inter', sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.7;
+}
+
+h1,h2,h3 {
+  font-family:'Merriweather', serif;
+  color:var(--primary);
+}
+
+.container {
+  max-width:900px;
+  margin:auto;
+  padding:0 20px;
+}
+
+/* ---------- HEADER ---------- */
+header {
+  padding:35px 0;
+  border-bottom:1px solid #e6e9ed;
+}
+
+.brand {
+  font-size:1.4rem;
+  font-weight:700;
+}
+
+/* ---------- SECTION ---------- */
+.section {
+  padding:60px 0;
+}
+
+.intro p {
+  color:var(--muted);
+  max-width:720px;
+}
+
+/* ---------- CALENDAR TOOL ---------- */
+.calendar-box {
+  background:var(--soft);
+  padding:30px;
+  border-radius:10px;
+  margin-top:30px;
+}
+
+.field {
+  margin-bottom:18px;
+}
+
+label {
+  display:block;
+  font-weight:600;
+  margin-bottom:6px;
+}
+
+select {
+  width:100%;
+  padding:12px;
+  border:1px solid #ccd3da;
+  border-radius:6px;
+  font-size:15px;
+}
+
+button {
+  background:var(--primary);
+  color:white;
+  border:none;
+  padding:14px;
+  width:100%;
+  font-size:16px;
+  font-weight:600;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+/* ---------- RESULT ---------- */
+.result {
+  background:white;
+  border:1px solid #e6e9ed;
+  border-radius:8px;
+  padding:25px;
+  margin-top:25px;
+}
+
+.event {
+  display:flex;
+  justify-content:space-between;
+  padding:10px 0;
+  border-bottom:1px solid #eee;
+}
+
+.event:last-child {
+  border-bottom:none;
+}
+
+.event strong {
+  color:var(--primary);
+}
+
+.note {
+  margin-top:15px;
+  font-size:14px;
+  color:var(--muted);
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  background:#f2f4f7;
+  padding:25px;
+  text-align:center;
+  font-size:14px;
+  color:#555;
+}
+
+/* ---------- MOBILE CTA ---------- */
+.sticky-cta {
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  display:flex;
+  background:white;
+  border-top:1px solid #ddd;
+}
+
+.sticky-cta a {
+  flex:1;
+  text-align:center;
+  padding:14px;
+  font-weight:600;
+  text-decoration:none;
+}
+
+.sticky-call { color:var(--primary); }
+.sticky-wa { background:var(--accent); color:#000; }
+
+@media(min-width:768px){
+  .sticky-cta { display:none; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <div class="brand">Personalised Compliance Calendar</div>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container intro">
+    <h1>Your Personalised Compliance Calendar</h1>
+    <p>
+      Select your business details to see which GST and tax compliances
+      apply to you. No overload. Only what matters.
+    </p>
+
+    <div class="calendar-box">
+
+      <div class="field">
+        <label>Business Type</label>
+        <select id="businessType">
+          <option value="">Select</option>
+          <option value="proprietor">Proprietorship</option>
+          <option value="company">Company / LLP</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>GST Filing Type</label>
+        <select id="filingType">
+          <option value="">Select</option>
+          <option value="monthly">Monthly</option>
+          <option value="quarterly">Quarterly (QRMP)</option>
+          <option value="composition">Composition Scheme</option>
+        </select>
+      </div>
+
+      <button onclick="generateCalendar()">Generate Calendar</button>
+
+      <div id="result" class="result" style="display:none;"></div>
+
+      <p class="note">
+        * This is a general compliance guide. Actual obligations may vary.
+      </p>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2025 GST & Tax Advocate | Guided Compliance
+</footer>
+
+<div class="sticky-cta">
+  <a href="tel:+919999999999" class="sticky-call">📞 Call</a>
+  <a href="https://wa.me/919999999999" class="sticky-wa">💬 WhatsApp</a>
+</div>
+
+<script>
+function generateCalendar() {
+  const business = document.getElementById("businessType").value;
+  const filing = document.getElementById("filingType").value;
+  const resultBox = document.getElementById("result");
+
+  if (!business || !filing) {
+    alert("Please select all details.");
+    return;
+  }
+
+  let events = [];
+
+  if (filing === "monthly") {
+    events.push(["GSTR-1", "11th of Next Month"]);
+    events.push(["GSTR-3B", "20th of Next Month"]);
+  }
+
+  if (filing === "quarterly") {
+    events.push(["GSTR-1 (Quarterly)", "13th after Quarter"]);
+    events.push(["GSTR-3B", "20th of Next Month"]);
+  }
+
+  if (filing === "composition") {
+    events.push(["CMP-08", "18th after Quarter"]);
+    events.push(["GSTR-4", "30th April"]);
+  }
+
+  if (business === "company") {
+    events.push(["Income Tax Return", "31st October"]);
+    events.push(["TDS Return", "Quarterly"]);
+  } else {
+    events.push(["Income Tax Return", "31st July"]);
+  }
+
+  resultBox.innerHTML = `
+    <h3>Applicable Compliances</h3>
+    ${events.map(e => `
+      <div class="event">
+        <span>${e[0]}</span>
+        <strong>${e[1]}</strong>
+      </div>
+    `).join("")}
+  `;
+
+  resultBox.style.display = "block";
+}
+</script>
+
+</body>
+</html>
