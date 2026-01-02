@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GST Return Due Date Tracker</title>
+<meta name="description" content="Check GST return due dates instantly for GSTR-1, GSTR-3B and more. Avoid late fees and penalties.">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary:#0b2d4d;
+  --accent:#c8a94a;
+  --bg:#ffffff;
+  --soft:#f7f8fa;
+  --text:#1a1a1a;
+  --muted:#5f6b77;
+}
+
+* { box-sizing:border-box; margin:0; padding:0; }
+
+body {
+  font-family:'Inter', sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.7;
+}
+
+h1,h2 {
+  font-family:'Merriweather', serif;
+  color:var(--primary);
+}
+
+.container {
+  max-width:900px;
+  margin:auto;
+  padding:0 20px;
+}
+
+/* ---------- HEADER ---------- */
+header {
+  padding:35px 0;
+  border-bottom:1px solid #e6e9ed;
+}
+
+.brand {
+  font-size:1.4rem;
+  font-weight:700;
+}
+
+/* ---------- SECTION ---------- */
+.section {
+  padding:60px 0;
+}
+
+.intro p {
+  color:var(--muted);
+  max-width:650px;
+}
+
+/* ---------- FORM ---------- */
+.tracker-box {
+  background:var(--soft);
+  padding:30px;
+  border-radius:10px;
+  margin-top:30px;
+}
+
+.field {
+  margin-bottom:18px;
+}
+
+label {
+  display:block;
+  font-weight:600;
+  margin-bottom:6px;
+}
+
+select {
+  width:100%;
+  padding:12px;
+  border:1px solid #ccd3da;
+  border-radius:6px;
+  font-size:15px;
+}
+
+button {
+  background:var(--primary);
+  color:white;
+  border:none;
+  padding:14px;
+  width:100%;
+  font-size:16px;
+  font-weight:600;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+/* ---------- RESULT ---------- */
+.result {
+  background:white;
+  border:1px solid #e6e9ed;
+  border-radius:8px;
+  padding:25px;
+  margin-top:25px;
+}
+
+.result-row {
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+.result-row strong {
+  color:var(--primary);
+}
+
+.warning {
+  margin-top:15px;
+  font-size:14px;
+  color:#7a1d1d;
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  background:#f2f4f7;
+  padding:25px;
+  text-align:center;
+  font-size:14px;
+  color:#555;
+}
+
+/* ---------- MOBILE CTA ---------- */
+.sticky-cta {
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  display:flex;
+  background:white;
+  border-top:1px solid #ddd;
+}
+
+.sticky-cta a {
+  flex:1;
+  text-align:center;
+  padding:14px;
+  font-weight:600;
+  text-decoration:none;
+}
+
+.sticky-call { color:var(--primary); }
+.sticky-wa { background:var(--accent); color:#000; }
+
+@media(min-width:768px){
+  .sticky-cta { display:none; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <div class="brand">GST Return Due-Date Tracker</div>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container intro">
+    <h1>GST Return Due-Date Tracker</h1>
+    <p>
+      Quickly check GST return due dates so nothing is missed.
+      This helps avoid late fees, penalties, and last-minute panic.
+    </p>
+
+    <div class="tracker-box">
+      <div class="field">
+        <label>Return Type</label>
+        <select id="returnType">
+          <option value="gstr1">GSTR-1</option>
+          <option value="gstr3b">GSTR-3B</option>
+          <option value="cmp08">CMP-08 (Composition)</option>
+          <option value="gstr4">GSTR-4</option>
+          <option value="gstr9">GSTR-9 (Annual)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Filing Period</label>
+        <select id="period">
+          <option value="monthly">Monthly</option>
+          <option value="quarterly">Quarterly</option>
+          <option value="annual">Annual</option>
+        </select>
+      </div>
+
+      <button onclick="showDueDate()">Check Due Date</button>
+
+      <div id="result" class="result" style="display:none;">
+        <div class="result-row">
+          <span>Return</span>
+          <strong id="rName"></strong>
+        </div>
+        <div class="result-row">
+          <span>Due Date</span>
+          <strong id="dueDate"></strong>
+        </div>
+        <div class="result-row">
+          <span>Late Fee Risk</span>
+          <strong id="penalty"></strong>
+        </div>
+
+        <p class="warning">
+          ⚠️ Missing due dates may attract late fees and interest.
+          Always file on or before the due date.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2025 GST & Tax Advocate | Calm & Clear Compliance
+</footer>
+
+<div class="sticky-cta">
+  <a href="tel:+919999999999" class="sticky-call">📞 Call</a>
+  <a href="https://wa.me/919999999999" class="sticky-wa">💬 WhatsApp</a>
+</div>
+
+<script>
+function showDueDate() {
+  const returnType = document.getElementById("returnType").value;
+  const period = document.getElementById("period").value;
+
+  let name = "", date = "", penalty = "";
+
+  if (returnType === "gstr1") {
+    name = "GSTR-1";
+    date = period === "monthly" ? "11th of Next Month" : "13th of Month After Quarter";
+    penalty = "₹200 per day (Max ₹10,000)";
+  }
+
+  if (returnType === "gstr3b") {
+    name = "GSTR-3B";
+    date = "20th of Next Month";
+    penalty = "₹50 per day (₹20 if NIL)";
+  }
+
+  if (returnType === "cmp08") {
+    name = "CMP-08";
+    date = "18th of Month After Quarter";
+    penalty = "₹200 per day";
+  }
+
+  if (returnType === "gstr4") {
+    name = "GSTR-4";
+    date = "30th April (Next Financial Year)";
+    penalty = "₹200 per day";
+  }
+
+  if (returnType === "gstr9") {
+    name = "GSTR-9";
+    date = "31st December (Next Financial Year)";
+    penalty = "₹200 per day (Subject to turnover)";
+  }
+
+  document.getElementById("rName").innerText = name;
+  document.getElementById("dueDate").innerText = date;
+  document.getElementById("penalty").innerText = penalty;
+
+  document.getElementById("result").style.display = "block";
+}
+</script>
+
+</body>
+</html>
