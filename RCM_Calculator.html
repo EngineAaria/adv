@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RCM Calculator</title>
+<meta name="description" content="Check whether Reverse Charge Mechanism applies and calculate tax liability under RCM.">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary:#0b2d4d;
+  --accent:#c8a94a;
+  --bg:#ffffff;
+  --soft:#f7f8fa;
+  --text:#1a1a1a;
+  --muted:#5f6b77;
+}
+
+* { box-sizing:border-box; margin:0; padding:0; }
+
+body {
+  font-family:'Inter', sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.7;
+}
+
+h1,h2,h3 {
+  font-family:'Merriweather', serif;
+  color:var(--primary);
+}
+
+.container {
+  max-width:900px;
+  margin:auto;
+  padding:0 20px;
+}
+
+/* ---------- HEADER ---------- */
+header {
+  padding:35px 0;
+  border-bottom:1px solid #e6e9ed;
+}
+
+.brand {
+  font-size:1.4rem;
+  font-weight:700;
+}
+
+/* ---------- SECTION ---------- */
+.section {
+  padding:60px 0;
+}
+
+.intro p {
+  color:var(--muted);
+  max-width:720px;
+}
+
+/* ---------- CALCULATOR ---------- */
+.rcm-box {
+  background:var(--soft);
+  padding:30px;
+  border-radius:10px;
+  margin-top:30px;
+}
+
+.field {
+  margin-bottom:18px;
+}
+
+label {
+  display:block;
+  font-weight:600;
+  margin-bottom:6px;
+}
+
+select, input {
+  width:100%;
+  padding:12px;
+  border:1px solid #ccd3da;
+  border-radius:6px;
+  font-size:15px;
+}
+
+button {
+  background:var(--primary);
+  color:white;
+  border:none;
+  padding:14px;
+  width:100%;
+  font-size:16px;
+  font-weight:600;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+/* ---------- RESULT ---------- */
+.result {
+  background:white;
+  border:1px solid #e6e9ed;
+  border-radius:8px;
+  padding:25px;
+  margin-top:25px;
+}
+
+.result-row {
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+.result strong {
+  color:var(--primary);
+}
+
+.warning {
+  margin-top:10px;
+  color:#7a1d1d;
+}
+
+.note {
+  margin-top:15px;
+  font-size:14px;
+  color:var(--muted);
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  background:#f2f4f7;
+  padding:25px;
+  text-align:center;
+  font-size:14px;
+  color:#555;
+}
+
+/* ---------- MOBILE CTA ---------- */
+.sticky-cta {
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  display:flex;
+  background:white;
+  border-top:1px solid #ddd;
+}
+
+.sticky-cta a {
+  flex:1;
+  text-align:center;
+  padding:14px;
+  font-weight:600;
+  text-decoration:none;
+}
+
+.sticky-call { color:var(--primary); }
+.sticky-wa { background:var(--accent); color:#000; }
+
+@media(min-width:768px){
+  .sticky-cta { display:none; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <div class="brand">RCM Calculator</div>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container intro">
+    <h1>RCM (Reverse Charge) Calculator</h1>
+    <p>
+      Answer a few questions to understand whether Reverse Charge applies
+      and calculate tax liability safely.
+    </p>
+
+    <div class="rcm-box">
+
+      <div class="field">
+        <label>Nature of Supply</label>
+        <select id="nature">
+          <option value="">Select</option>
+          <option value="service">Service</option>
+          <option value="goods">Goods</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Supplier Registered under GST?</label>
+        <select id="supplier">
+          <option value="">Select</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Is Service Covered under RCM List?</label>
+        <select id="rcmList">
+          <option value="">Select</option>
+          <option value="yes">Yes</option>
+          <option value="no">Not Sure / No</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Invoice Amount</label>
+        <input type="number" id="amount" placeholder="Enter invoice amount">
+      </div>
+
+      <div class="field">
+        <label>GST Rate</label>
+        <select id="rate">
+          <option value="5">5%</option>
+          <option value="12">12%</option>
+          <option value="18" selected>18%</option>
+          <option value="28">28%</option>
+        </select>
+      </div>
+
+      <button onclick="calculateRCM()">Check RCM & Calculate</button>
+
+      <div id="result" class="result" style="display:none;"></div>
+
+      <p class="note">
+        * This tool provides indicative guidance. Final applicability depends on law and notifications.
+      </p>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2025 GST & Tax Advocate | Safe RCM Advisory
+</footer>
+
+<div class="sticky-cta">
+  <a href="tel:+919999999999" class="sticky-call">📞 Call</a>
+  <a href="https://wa.me/919999999999" class="sticky-wa">💬 WhatsApp</a>
+</div>
+
+<script>
+function calculateRCM() {
+  const nature = document.getElementById("nature").value;
+  const supplier = document.getElementById("supplier").value;
+  const rcmList = document.getElementById("rcmList").value;
+  const amount = parseFloat(document.getElementById("amount").value);
+  const rate = parseFloat(document.getElementById("rate").value);
+
+  if (!nature || !supplier || !rcmList || isNaN(amount)) {
+    alert("Please fill all details.");
+    return;
+  }
+
+  let applies = false;
+
+  if (supplier === "no") applies = true;
+  if (rcmList === "yes") applies = true;
+
+  const tax = amount * (rate / 100);
+  const resultBox = document.getElementById("result");
+
+  if (applies) {
+    resultBox.innerHTML = `
+      <strong>RCM Likely Applicable</strong>
+      <div class="result-row">
+        <span>Tax Payable under RCM</span>
+        <strong>₹ ${tax.toFixed(2)}</strong>
+      </div>
+      <p class="warning">
+        Tax to be paid by recipient. ITC can be claimed subject to conditions.
+      </p>
+    `;
+  } else {
+    resultBox.innerHTML = `
+      <strong>RCM Not Indicated</strong>
+      <p>
+        Based on provided details, RCM does not appear applicable.
+        Please verify service category before proceeding.
+      </p>
+    `;
+  }
+
+  resultBox.style.display = "block";
+}
+</script>
+
+</body>
+</html>
