@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tax Notice Response Helper</title>
+<meta name="description" content="Understand tax notices calmly and prepare a structured first response. Reduce panic and save time.">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary:#0b2d4d;
+  --accent:#c8a94a;
+  --bg:#ffffff;
+  --soft:#f7f8fa;
+  --text:#1a1a1a;
+  --muted:#5f6b77;
+}
+
+* { box-sizing:border-box; margin:0; padding:0; }
+
+body {
+  font-family:'Inter', sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.7;
+}
+
+h1,h2,h3 {
+  font-family:'Merriweather', serif;
+  color:var(--primary);
+}
+
+.container {
+  max-width:900px;
+  margin:auto;
+  padding:0 20px;
+}
+
+/* ---------- HEADER ---------- */
+header {
+  padding:35px 0;
+  border-bottom:1px solid #e6e9ed;
+}
+
+.brand {
+  font-size:1.4rem;
+  font-weight:700;
+}
+
+/* ---------- SECTION ---------- */
+.section {
+  padding:60px 0;
+}
+
+.intro p {
+  color:var(--muted);
+  max-width:750px;
+}
+
+/* ---------- HELPER BOX ---------- */
+.helper-box {
+  background:var(--soft);
+  padding:30px;
+  border-radius:10px;
+  margin-top:30px;
+}
+
+.field {
+  margin-bottom:18px;
+}
+
+label {
+  display:block;
+  font-weight:600;
+  margin-bottom:6px;
+}
+
+select, input, textarea {
+  width:100%;
+  padding:12px;
+  border:1px solid #ccd3da;
+  border-radius:6px;
+  font-size:15px;
+}
+
+textarea {
+  resize:none;
+  height:120px;
+}
+
+button {
+  background:var(--primary);
+  color:white;
+  border:none;
+  padding:14px;
+  width:100%;
+  font-size:16px;
+  font-weight:600;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+/* ---------- RESULT ---------- */
+.result {
+  background:white;
+  border:1px solid #e6e9ed;
+  border-radius:8px;
+  padding:25px;
+  margin-top:25px;
+}
+
+.result h3 {
+  margin-bottom:10px;
+}
+
+.result p {
+  color:var(--muted);
+  margin-bottom:10px;
+}
+
+.flag {
+  color:#7a1d1d;
+  font-weight:600;
+}
+
+.safe {
+  color:#1e7a3a;
+  font-weight:600;
+}
+
+.note {
+  margin-top:15px;
+  font-size:14px;
+  color:var(--muted);
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  background:#f2f4f7;
+  padding:25px;
+  text-align:center;
+  font-size:14px;
+  color:#555;
+}
+
+/* ---------- MOBILE CTA ---------- */
+.sticky-cta {
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  display:flex;
+  background:white;
+  border-top:1px solid #ddd;
+}
+
+.sticky-cta a {
+  flex:1;
+  text-align:center;
+  padding:14px;
+  font-weight:600;
+  text-decoration:none;
+}
+
+.sticky-call { color:var(--primary); }
+.sticky-wa { background:var(--accent); color:#000; }
+
+@media(min-width:768px){
+  .sticky-cta { display:none; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <div class="brand">Tax Notice Response Helper</div>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container intro">
+    <h1>Tax Notice Response Helper</h1>
+    <p>
+      Answer a few questions to understand your notice and prepare
+      a calm, structured first response.
+    </p>
+
+    <div class="helper-box">
+
+      <div class="field">
+        <label>Notice Type</label>
+        <select id="noticeType">
+          <option value="">Select</option>
+          <option value="gst">GST Notice</option>
+          <option value="income-tax">Income Tax Notice</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Reason Mentioned in Notice</label>
+        <select id="reason">
+          <option value="">Select</option>
+          <option value="return-mismatch">Return Mismatch</option>
+          <option value="itc">ITC Issue</option>
+          <option value="late-filing">Late Filing</option>
+          <option value="non-compliance">Non-Compliance</option>
+          <option value="other">Other / Not Clear</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Reply Due Date</label>
+        <input type="date" id="dueDate">
+      </div>
+
+      <div class="field">
+        <label>Brief Description (Optional)</label>
+        <textarea id="description" placeholder="Short explanation of notice contents"></textarea>
+      </div>
+
+      <button onclick="analyzeNotice()">Analyze & Guide</button>
+
+      <div id="result" class="result" style="display:none;"></div>
+
+      <p class="note">
+        * This tool provides first-level guidance only. Final response must be reviewed professionally.
+      </p>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2025 GST & Tax Advocate | Calm & Strategic Notice Handling
+</footer>
+
+<div class="sticky-cta">
+  <a href="tel:+919999999999" class="sticky-call">📞 Call</a>
+  <a href="https://wa.me/919999999999" class="sticky-wa">💬 WhatsApp</a>
+</div>
+
+<script>
+function analyzeNotice() {
+  const type = document.getElementById("noticeType").value;
+  const reason = document.getElementById("reason").value;
+  const due = document.getElementById("dueDate").value;
+  const resultBox = document.getElementById("result");
+
+  if (!type || !reason || !due) {
+    alert("Please fill required details.");
+    return;
+  }
+
+  let message = "";
+
+  if (reason === "return-mismatch" || reason === "itc") {
+    message = `
+      <h3 class="flag">Important — Needs Careful Review</h3>
+      <p>
+        This type of notice usually requires document reconciliation
+        and a properly drafted reply.
+      </p>
+      <p>
+        Avoid casual or delayed responses. Early structured reply is critical.
+      </p>
+    `;
+  } else {
+    message = `
+      <h3 class="safe">Manageable Notice</h3>
+      <p>
+        Based on initial information, this notice appears manageable.
+        Timely and clear reply should resolve the matter.
+      </p>
+    `;
+  }
+
+  message += `
+    <p><strong>Next Recommended Steps:</strong></p>
+    <ul>
+      <li>Collect relevant documents</li>
+      <li>Review past returns and filings</li>
+      <li>Draft reply before due date</li>
+    </ul>
+  `;
+
+  resultBox.innerHTML = message;
+  resultBox.style.display = "block";
+}
+</script>
+
+</body>
+</html>
