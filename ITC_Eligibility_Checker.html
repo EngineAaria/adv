@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ITC Eligibility Checker</title>
+<meta name="description" content="Check basic Input Tax Credit eligibility before claiming. Avoid wrong claims and future GST notices.">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary:#0b2d4d;
+  --accent:#c8a94a;
+  --bg:#ffffff;
+  --soft:#f7f8fa;
+  --text:#1a1a1a;
+  --muted:#5f6b77;
+}
+
+* { box-sizing:border-box; margin:0; padding:0; }
+
+body {
+  font-family:'Inter', sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.7;
+}
+
+h1,h2,h3 {
+  font-family:'Merriweather', serif;
+  color:var(--primary);
+}
+
+.container {
+  max-width:900px;
+  margin:auto;
+  padding:0 20px;
+}
+
+/* ---------- HEADER ---------- */
+header {
+  padding:35px 0;
+  border-bottom:1px solid #e6e9ed;
+}
+
+.brand {
+  font-size:1.4rem;
+  font-weight:700;
+}
+
+/* ---------- SECTION ---------- */
+.section {
+  padding:60px 0;
+}
+
+.intro p {
+  color:var(--muted);
+  max-width:720px;
+}
+
+/* ---------- CHECKER ---------- */
+.checker-box {
+  background:var(--soft);
+  padding:30px;
+  border-radius:10px;
+  margin-top:30px;
+}
+
+.question {
+  margin-bottom:22px;
+}
+
+.question label {
+  display:block;
+  font-weight:600;
+  margin-bottom:8px;
+}
+
+.options {
+  display:flex;
+  gap:20px;
+}
+
+.options label {
+  font-weight:500;
+}
+
+/* ---------- RESULT ---------- */
+.result {
+  background:white;
+  border:1px solid #e6e9ed;
+  border-radius:8px;
+  padding:25px;
+  margin-top:30px;
+}
+
+.result strong {
+  color:var(--primary);
+}
+
+.result p {
+  margin-top:10px;
+  color:var(--muted);
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  background:#f2f4f7;
+  padding:25px;
+  text-align:center;
+  font-size:14px;
+  color:#555;
+}
+
+/* ---------- MOBILE CTA ---------- */
+.sticky-cta {
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  display:flex;
+  background:white;
+  border-top:1px solid #ddd;
+}
+
+.sticky-cta a {
+  flex:1;
+  text-align:center;
+  padding:14px;
+  font-weight:600;
+  text-decoration:none;
+}
+
+.sticky-call { color:var(--primary); }
+.sticky-wa { background:var(--accent); color:#000; }
+
+@media(min-width:768px){
+  .sticky-cta { display:none; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <div class="brand">ITC Eligibility Checker</div>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container intro">
+    <h1>ITC Eligibility Checker</h1>
+    <p>
+      Answer a few basic questions to understand whether Input Tax Credit
+      can be claimed. This helps avoid wrong claims and future disputes.
+    </p>
+
+    <div class="checker-box">
+
+      <div class="question">
+        <label>1. Is the supplier GST registered?</label>
+        <div class="options">
+          <label><input type="radio" name="q1" value="yes"> Yes</label>
+          <label><input type="radio" name="q1" value="no"> No</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <label>2. Do you have a valid tax invoice?</label>
+        <div class="options">
+          <label><input type="radio" name="q2" value="yes"> Yes</label>
+          <label><input type="radio" name="q2" value="no"> No</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <label>3. Has the supplier filed GSTR-1?</label>
+        <div class="options">
+          <label><input type="radio" name="q3" value="yes"> Yes</label>
+          <label><input type="radio" name="q3" value="no"> Not Sure / No</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <label>4. Are the goods/services used for business purposes?</label>
+        <div class="options">
+          <label><input type="radio" name="q4" value="yes"> Yes</label>
+          <label><input type="radio" name="q4" value="no"> No</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <label>5. Is ITC blocked under GST law (e.g. personal use, motor car, food, etc.)?</label>
+        <div class="options">
+          <label><input type="radio" name="q5" value="no"> No</label>
+          <label><input type="radio" name="q5" value="yes"> Yes</label>
+        </div>
+      </div>
+
+      <button onclick="checkITC()" style="margin-top:15px;background:var(--primary);color:white;padding:14px;border:none;width:100%;font-size:16px;border-radius:6px;font-weight:600;">
+        Check Eligibility
+      </button>
+
+      <div id="result" class="result" style="display:none;"></div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2025 GST & Tax Advocate | Responsible Credit Advisory
+</footer>
+
+<div class="sticky-cta">
+  <a href="tel:+919999999999" class="sticky-call">📞 Call</a>
+  <a href="https://wa.me/919999999999" class="sticky-wa">💬 WhatsApp</a>
+</div>
+
+<script>
+function checkITC() {
+  const answers = [
+    document.querySelector('input[name="q1"]:checked')?.value,
+    document.querySelector('input[name="q2"]:checked')?.value,
+    document.querySelector('input[name="q3"]:checked')?.value,
+    document.querySelector('input[name="q4"]:checked')?.value,
+    document.querySelector('input[name="q5"]:checked')?.value
+  ];
+
+  if (answers.includes(undefined)) {
+    alert("Please answer all questions.");
+    return;
+  }
+
+  const resultBox = document.getElementById("result");
+
+  if (
+    answers[0] === "yes" &&
+    answers[1] === "yes" &&
+    answers[2] === "yes" &&
+    answers[3] === "yes" &&
+    answers[4] === "no"
+  ) {
+    resultBox.innerHTML = `
+      <strong>ITC Likely Eligible</strong>
+      <p>
+        Based on your answers, ITC appears to be eligible.
+        Final claim should be made after reconciliation and professional review.
+      </p>
+    `;
+  } else {
+    resultBox.innerHTML = `
+      <strong>ITC Risk Identified</strong>
+      <p>
+        One or more conditions for claiming ITC are not satisfied.
+        Claiming ITC in this case may lead to notices or reversal.
+        Please review before proceeding.
+      </p>
+    `;
+  }
+
+  resultBox.style.display = "block";
+}
+</script>
+
+</body>
+</html>
