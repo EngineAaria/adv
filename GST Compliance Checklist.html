@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GST Compliance Checklist</title>
+<meta name="description" content="GST Compliance Checklist to ensure all steps are completed accurately and on time.">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary:#0b2d4d;
+  --accent:#c8a94a;
+  --bg:#ffffff;
+  --soft:#f7f8fa;
+  --text:#1a1a1a;
+  --muted:#5f6b77;
+}
+
+* { box-sizing:border-box; margin:0; padding:0; }
+
+body {
+  font-family:'Inter', sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.7;
+}
+
+h1,h2 {
+  font-family:'Merriweather', serif;
+  color:var(--primary);
+}
+
+.container {
+  max-width:900px;
+  margin:auto;
+  padding:0 20px;
+}
+
+/* ---------- HEADER ---------- */
+header {
+  padding:35px 0;
+  border-bottom:1px solid #e6e9ed;
+}
+
+.brand {
+  font-size:1.4rem;
+  font-weight:700;
+}
+
+/* ---------- SECTION ---------- */
+.section {
+  padding:60px 0;
+}
+
+.intro p {
+  color:var(--muted);
+  max-width:700px;
+}
+
+/* ---------- CHECKLIST ---------- */
+.checklist-box {
+  background:var(--soft);
+  padding:30px;
+  border-radius:10px;
+  margin-top:30px;
+}
+
+.checklist-group {
+  background:white;
+  border:1px solid #e6e9ed;
+  border-radius:8px;
+  padding:20px;
+  margin-bottom:25px;
+}
+
+.checklist-group h3 {
+  margin-bottom:15px;
+  font-size:1.25rem;
+}
+
+.item {
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  margin-bottom:12px;
+}
+
+.item input {
+  margin-top:5px;
+  width:16px;
+  height:16px;
+}
+
+.item label {
+  font-size:15px;
+  cursor:pointer;
+}
+
+.note {
+  font-size:14px;
+  color:var(--muted);
+  margin-top:15px;
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  background:#f2f4f7;
+  padding:25px;
+  text-align:center;
+  font-size:14px;
+  color:#555;
+}
+
+/* ---------- MOBILE CTA ---------- */
+.sticky-cta {
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  display:flex;
+  background:white;
+  border-top:1px solid #ddd;
+}
+
+.sticky-cta a {
+  flex:1;
+  text-align:center;
+  padding:14px;
+  font-weight:600;
+  text-decoration:none;
+}
+
+.sticky-call { color:var(--primary); }
+.sticky-wa { background:var(--accent); color:#000; }
+
+@media(min-width:768px){
+  .sticky-cta { display:none; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <div class="brand">GST Compliance Checklist</div>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container intro">
+    <h1>GST Compliance Checklist</h1>
+    <p>
+      A simple, step-by-step checklist to ensure nothing is missed.
+      Designed for junior staff, clients, and internal control.
+    </p>
+
+    <div class="checklist-box">
+
+      <!-- REGISTRATION -->
+      <div class="checklist-group">
+        <h3>GST Registration & Profile</h3>
+
+        <div class="item">
+          <input type="checkbox" id="reg1">
+          <label for="reg1">GST Registration certificate verified</label>
+        </div>
+
+        <div class="item">
+          <input type="checkbox" id="reg2">
+          <label for="reg2">Trade name, address & business details checked</label>
+        </div>
+
+        <div class="item">
+          <input type="checkbox" id="reg3">
+          <label for="reg3">Bank account details verified on GST portal</label>
+        </div>
+      </div>
+
+      <!-- DOCUMENTS -->
+      <div class="checklist-group">
+        <h3>Documents Collected</h3>
+
+        <div class="item">
+          <input type="checkbox" id="doc1">
+          <label for="doc1">Sales invoices for the period</label>
+        </div>
+
+        <div class="item">
+          <input type="checkbox" id="doc2">
+          <label for="doc2">Purchase invoices with GST details</label>
+        </div>
+
+        <div class="item">
+          <input type="checkbox" id="doc3">
+          <label for="doc3">Expense bills (rent, phone, utilities)</label>
+        </div>
+      </div>
+
+      <!-- RETURNS -->
+      <div class="checklist-group">
+        <h3>Return Preparation</h3>
+
+        <div class="item">
+          <input type="checkbox" id="ret1">
+          <label for="ret1">GSTR-1 data matched with invoices</label>
+        </div>
+
+        <div class="item">
+          <input type="checkbox" id="ret2">
+          <label for="ret2">GSTR-3B figures reconciled</label>
+        </div>
+
+        <div class="item">
+          <input type="checkbox" id="ret3">
+          <label for="ret3">ITC eligibility checked</label>
+        </div>
+      </div>
+
+      <!-- PAYMENT -->
+      <div class="checklist-group">
+        <h3>Tax Payment</h3>
+
+        <div class="item">
+          <input type="checkbox" id="pay1">
+          <label for="pay1">GST payable calculated correctly</label>
+        </div>
+
+        <div class="item">
+          <input type="checkbox" id="pay2">
+          <label for="pay2">Cash & credit ledger balance checked</label>
+        </div>
+
+        <div class="item">
+          <input type="checkbox" id="pay3">
+          <label for="pay3">Tax payment challan generated</label>
+        </div>
+      </div>
+
+      <!-- FINAL -->
+      <div class="checklist-group">
+        <h3>Final Filing & Records</h3>
+
+        <div class="item">
+          <input type="checkbox" id="final1">
+          <label for="final1">Return filed before due date</label>
+        </div>
+
+        <div class="item">
+          <input type="checkbox" id="final2">
+          <label for="final2">Acknowledgement saved</label>
+        </div>
+
+        <div class="item">
+          <input type="checkbox" id="final3">
+          <label for="final3">Client informed with confirmation</label>
+        </div>
+      </div>
+
+      <p class="note">
+        * This checklist ensures process discipline and reduces errors.
+        Always review before final submission.
+      </p>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2025 GST & Tax Advocate | Structured & Reliable Compliance
+</footer>
+
+<div class="sticky-cta">
+  <a href="tel:+919999999999" class="sticky-call">📞 Call</a>
+  <a href="https://wa.me/919999999999" class="sticky-wa">💬 WhatsApp</a>
+</div>
+
+</body>
+</html>
