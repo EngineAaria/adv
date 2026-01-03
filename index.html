@@ -5,118 +5,98 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>GST & Tax Advocate | Calm & Trusted Legal Guidance</title>
-<meta name="description" content="Professional GST & Income Tax Advocate providing calm, reliable guidance.">
+<meta name="description" content="Professional GST & Income Tax Advocate providing calm, reliable guidance for registrations, returns, notices, and compliance. Call or WhatsApp for quick help.">
 
+<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --primary:#0b2d4d;
-  --accent:#c8a94a;
+:root {
+  --primary:#0b2d4d;     /* Deep Navy */
+  --accent:#c8a94a;     /* Muted Gold */
   --bg:#ffffff;
   --soft:#f7f8fa;
   --text:#1a1a1a;
   --muted:#5f6b77;
 }
 
-*{box-sizing:border-box;margin:0;padding:0}
+* {
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-body{
-  font-family:'Inter',sans-serif;
+body {
+  font-family:'Inter', sans-serif;
   background:var(--bg);
   color:var(--text);
   line-height:1.7;
-  padding-top:100vh;
 }
 
-h1,h2,h3{
-  font-family:'Merriweather',serif;
+h1,h2,h3 {
+  font-family:'Merriweather', serif;
   color:var(--primary);
 }
 
-.container{
+.container {
   max-width:1100px;
   margin:auto;
   padding:0 20px;
 }
 
-/* ================= PROGRESSIVE HEADER ================= */
-
-#mainHeader{
-  position:fixed;
-  top:0;left:0;
-  width:100%;
-  height:100vh;
-  background:var(--bg);
-  z-index:1000;
-  overflow:hidden;
+/* ---------- HEADER ---------- */
+header {
+  padding:40px 0 30px;
+  border-bottom:1px solid #e6e9ed;
 }
 
-.header-center{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  text-align:center;
-  will-change:transform;
-}
-
-.header-center img{
-  width:140px;
-  margin-bottom:14px;
-}
-
-.header-center .brand{
-  font-size:1.8rem;
-  font-weight:700;
-}
-
-.header-bar{
-  position:absolute;
-  top:0;left:0;
-  width:100%;
-  padding:14px 20px;
+.header-wrap {
   display:flex;
   justify-content:space-between;
   align-items:center;
-  opacity:0;
+  flex-wrap:wrap;
 }
 
-.header-left{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.header-left img{width:42px}
-
-.header-left span{
+.brand {
+  font-size:1.5rem;
   font-weight:700;
+}
+
+.contact-actions a {
+  text-decoration:none;
+  font-weight:600;
+  margin-left:15px;
+}
+
+.call {
   color:var(--primary);
 }
 
-.contact-actions a{
-  text-decoration:none;
-  font-weight:600;
-  margin-left:12px;
-}
-
-.call{color:var(--primary)}
-.whatsapp{
+.whatsapp {
   background:var(--accent);
   color:#000;
-  padding:8px 14px;
+  padding:10px 18px;
   border-radius:6px;
 }
 
-/* ================= SECTIONS ================= */
+/* ---------- HERO ---------- */
+.hero {
+  padding:70px 0 60px;
+  background:var(--soft);
+}
 
-.section{padding:70px 0}
+.hero h1 {
+  font-size:2.4rem;
+  margin-bottom:16px;
+}
 
-.hero{background:var(--soft)}
-.hero p{color:var(--muted)}
+.hero p {
+  max-width:720px;
+  color:var(--muted);
+  margin-bottom:30px;
+}
 
-.hero-actions a{
+.hero-actions a {
   display:inline-block;
   margin-right:15px;
   padding:14px 22px;
@@ -125,75 +105,144 @@ h1,h2,h3{
   font-weight:600;
 }
 
-.hero-call{background:var(--primary);color:#fff}
-.hero-wa{background:var(--accent);color:#000}
+.hero-call {
+  background:var(--primary);
+  color:white;
+}
 
-/* Trust */
-.trust{
+.hero-wa {
+  background:var(--accent);
+  color:#000;
+}
+
+/* ---------- TRUST STRIP ---------- */
+.trust {
   padding:30px 0;
   border-bottom:1px solid #e6e9ed;
 }
-.trust-grid{
+
+.trust-grid {
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
   gap:20px;
   text-align:center;
 }
-.trust-item strong{
+
+.trust-item strong {
   font-size:1.4rem;
   color:var(--primary);
 }
 
-/* Services */
-.services{
+/* ---------- SERVICES ---------- */
+.section {
+  padding:70px 0;
+}
+
+.section-title {
+  margin-bottom:40px;
+  font-size:2rem;
+}
+
+.services {
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
   gap:30px;
 }
-.card{
-  background:#fff;
+
+.card {
+  background:white;
   padding:28px;
   border:1px solid #e6e9ed;
   border-radius:8px;
 }
-.card p{color:var(--muted)}
 
-/* Tools */
-.tools{background:var(--soft)}
-.tools-grid{
+.card h3 {
+  margin-bottom:10px;
+  font-size:1.2rem;
+}
+
+.card p {
+  color:var(--muted);
+}
+
+/* ---------- HOW WE WORK ---------- */
+.steps {
+  max-width:800px;
+}
+
+.step {
+  display:flex;
+  gap:18px;
+  margin-bottom:25px;
+}
+
+.step span {
+  width:34px;
+  height:34px;
+  background:var(--primary);
+  color:white;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:600;
+}
+
+/* ---------- TOOLS ---------- */
+.tools {
+  background:var(--soft);
+}
+
+.tools-grid {
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:20px;
 }
-.tools-grid a{
-  background:#fff;
+
+.tool {
+  background:white;
   padding:22px;
-  border:1px solid #e6e9ed;
   border-radius:8px;
-  text-decoration:none;
-  color:inherit;
-  transition:.2s ease;
-}
-.tools-grid a:hover{
-  border-color:var(--accent);
-  transform:translateY(-2px);
+  border:1px solid #e6e9ed;
 }
 
-/* Testimonials */
-.testimonial{
+/* ---------- TESTIMONIALS ---------- */
+.testimonials {
+  background:white;
+}
+
+.testimonial {
   border-left:4px solid var(--accent);
   padding-left:18px;
   margin-bottom:25px;
 }
 
-/* CTA */
-.cta{
+.testimonial strong {
+  display:block;
+  margin-top:8px;
+  color:var(--primary);
+}
+
+/* ---------- CTA ---------- */
+.cta {
   background:var(--primary);
-  color:#fff;
+  color:white;
   padding:70px 20px;
   text-align:center;
 }
-.cta a{
+
+.cta h2 {
+  color:white;
+  margin-bottom:15px;
+}
+
+.cta p {
+  max-width:700px;
+  margin:0 auto 30px;
+  opacity:0.95;
+}
+
+.cta a {
   display:inline-block;
   background:var(--accent);
   color:#000;
@@ -204,63 +253,71 @@ h1,h2,h3{
   margin:8px;
 }
 
-/* Footer */
-footer{
+/* ---------- FOOTER ---------- */
+footer {
   background:#f2f4f7;
-  padding:30px;
+  padding:30px 20px;
   text-align:center;
   font-size:14px;
   color:#555;
 }
 
-/* Sticky CTA */
-.sticky-cta{
+/* ---------- MOBILE STICKY CTA ---------- */
+.sticky-cta {
   position:fixed;
-  bottom:0;left:0;
+  bottom:0;
+  left:0;
   width:100%;
   display:flex;
-  background:#fff;
+  background:white;
   border-top:1px solid #ddd;
 }
-.sticky-cta a{
+
+.sticky-cta a {
   flex:1;
   text-align:center;
   padding:14px;
   font-weight:600;
   text-decoration:none;
 }
-.sticky-wa{background:var(--accent);color:#000}
-@media(min-width:768px){.sticky-cta{display:none}}
+
+.sticky-call {
+  color:var(--primary);
+}
+
+.sticky-wa {
+  background:var(--accent);
+  color:#000;
+}
+
+@media(min-width:768px){
+  .sticky-cta { display:none; }
+}
 </style>
 </head>
 
 <body>
 
-<header id="mainHeader">
-  <div class="header-center" id="headerCenter">
-    <img src="logo.png" id="logo">
-    <div class="brand" id="brand">Adv. Brijesh Kumar</div>
-  </div>
-
-  <div class="header-bar" id="headerBar">
-    <div class="header-left">
-      <img src="logo.png">
-      <span>Adv. Brijesh Kumar</span>
-    </div>
+<header>
+  <div class="container header-wrap">
+    <div class="brand">Adv. Brijesh Kumar</div>
     <div class="contact-actions">
-      <a href="tel:+919999999999" class="call">📞 Call</a>
+      <a href="tel:+919999999999" class="call">📞 +91 99999 99999</a>
       <a href="https://wa.me/919999999999" class="whatsapp">WhatsApp</a>
     </div>
   </div>
 </header>
 
-<section class="section hero">
+<section class="hero">
   <div class="container">
     <h1>Calm, Reliable GST & Tax Guidance</h1>
-    <p>Helping individuals and businesses handle GST, Income Tax, notices, and compliance with clarity.</p>
+    <p>
+      Helping individuals and businesses handle GST, Income Tax,
+      notices, and compliance with clarity — not confusion.
+    </p>
     <div class="hero-actions">
-      <a href="#" class="hero-call">Call for Guidance</a>
-      <a href="#" class="hero-wa">WhatsApp Us</a>
+      <a href="tel:+919999999999" class="hero-call">Call for Guidance</a>
+      <a href="https://wa.me/919999999999" class="hero-wa">WhatsApp Us</a>
     </div>
   </div>
 </section>
@@ -274,16 +331,80 @@ footer{
   </div>
 </section>
 
-<section class="section tools">
+<section class="section">
   <div class="container">
-    <h2>Helpful Tools</h2>
-    <div class="tools-grid">
-      <a href="gst-calculator.html"><h3>GST Calculator</h3><p>Clear GST breakup.</p></a>
-      <a href="gst-due-date-tracker.html"><h3>Due Date Tracker</h3><p>Never miss deadlines.</p></a>
-      <a href="itc-eligibility-checker.html"><h3>ITC Checker</h3><p>Check ITC safety.</p></a>
-      <a href="client-document-checklist-generator.html"><h3>Document Checklist</h3><p>Clients come prepared.</p></a>
+    <h2 class="section-title">Our Services</h2>
+    <div class="services">
+      <div class="card"><h3>GST Registration</h3><p>New registrations with correct structure and compliance.</p></div>
+      <div class="card"><h3>GST Returns</h3><p>Monthly, quarterly & annual filing without stress.</p></div>
+      <div class="card"><h3>GST Notices</h3><p>Clear explanation and proper response to department notices.</p></div>
+      <div class="card"><h3>Income Tax Filing</h3><p>Individuals, professionals, and businesses.</p></div>
+      <div class="card"><h3>Appeals & Replies</h3><p>Handled carefully with legal clarity.</p></div>
+      <div class="card"><h3>Business Compliance</h3><p>Ongoing compliance so you stay worry-free.</p></div>
     </div>
   </div>
+</section>
+
+<section class="section tools">
+  <div class="container">
+    <h2 class="section-title">Helpful Tools</h2>
+
+    <div class="tools-grid">
+
+      <!-- GST Calculator -->
+      <a href="gst-calculator.html" class="tool">
+        <h3>GST Calculator</h3>
+        <p>Calculate GST amount and breakup clearly before billing.</p>
+      </a>
+
+      <!-- Due Date Tracker -->
+      <a href="gst-due-date-tracker.html" class="tool">
+        <h3>GST Return Due Date Tracker</h3>
+        <p>Know upcoming filing dates based on your return type.</p>
+      </a>
+
+      <!-- ITC Eligibility -->
+      <a href="itc-eligibility-checker.html" class="tool">
+        <h3>ITC Eligibility Checker</h3>
+        <p>Check whether ITC can be safely claimed.</p>
+      </a>
+
+      <!-- Document Checklist -->
+      <a href="client-document-checklist-generator.html" class="tool">
+        <h3>Document Checklist</h3>
+        <p>Know what documents required for the desired work.</p>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+
+<section class="section testimonials">
+  <div class="container">
+    <h2 class="section-title">Client Experiences</h2>
+
+    <div class="testimonial">
+      “Explained my GST notice calmly and handled everything. I felt relieved.”
+      <strong>— Anil Gupta, Trader (Kanpur)</strong>
+    </div>
+
+    <div class="testimonial">
+      “Very clear advice. No rushing, no fear-creating language.”
+      <strong>— Pooja Verma, Boutique Owner</strong>
+    </div>
+
+  </div>
+</section>
+
+<section class="cta">
+  <h2>Need Calm & Clear Tax Guidance?</h2>
+  <p>
+    You don’t need to understand everything.
+    You just need the right advocate on your side.
+  </p>
+  <a href="tel:+919999999999">Call Now</a>
+  <a href="https://wa.me/919999999999">WhatsApp</a>
 </section>
 
 <footer>
@@ -291,32 +412,9 @@ footer{
 </footer>
 
 <div class="sticky-cta">
-  <a href="tel:+919999999999">📞 Call</a>
+  <a href="tel:+919999999999" class="sticky-call">📞 Call</a>
   <a href="https://wa.me/919999999999" class="sticky-wa">💬 WhatsApp</a>
 </div>
-
-<script>
-const header=document.getElementById("mainHeader");
-const center=document.getElementById("headerCenter");
-const logo=document.getElementById("logo");
-const bar=document.getElementById("headerBar");
-
-const maxScroll=140;
-
-window.addEventListener("scroll",()=>{
-  const s=Math.min(window.scrollY,maxScroll);
-  const p=s/maxScroll;
-
-  header.style.height=`${100-p*70}vh`;
-
-  center.style.transform=
-    `translate(${-50-p*40}%,${-50-p*40}%) scale(${1-p*0.45})`;
-
-  logo.style.width=`${140-p*90}px`;
-
-  bar.style.opacity=p;
-});
-</script>
 
 </body>
 </html>
