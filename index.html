@@ -32,6 +32,10 @@ body {
   color:var(--text);
   line-height:1.7;
 }
+  body {
+  padding-top:100vh;
+}
+
 
 h1,h2,h3 {
   font-family:'Merriweather', serif;
@@ -293,14 +297,99 @@ footer {
 @media(min-width:768px){
   .sticky-cta { display:none; }
 }
+  /* ---------- SMART HEADER TRANSITION ---------- */
+
+#mainHeader {
+  position:fixed;
+  top:0;
+  width:100%;
+  background:var(--bg);
+  z-index:999;
+  transition:all 0.4s ease;
+}
+
+/* EXPANDED STATE */
+.header-expanded {
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.header-center {
+  text-align:center;
+  transition:opacity 0.3s ease;
+}
+
+.logo-large {
+  width:140px;
+  margin-bottom:16px;
+}
+
+.brand-large {
+  font-family:'Merriweather', serif;
+  font-size:1.8rem;
+  color:var(--primary);
+  font-weight:700;
+}
+
+/* COMPACT HEADER (HIDDEN INITIALLY) */
+.header-compact {
+  display:none;
+  padding:18px 0;
+}
+
+.brand-left {
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logo-small {
+  width:42px;
+}
+
+.brand-small {
+  font-weight:700;
+  font-size:1.05rem;
+  color:var(--primary);
+}
+
+/* SCROLLED STATE */
+#mainHeader.scrolled {
+  height:auto;
+  border-bottom:1px solid #e6e9ed;
+}
+
+#mainHeader.scrolled .header-center {
+  display:none;
+}
+
+#mainHeader.scrolled .header-compact {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  max-width:1100px;
+  margin:auto;
+  padding:14px 20px;
+}
 </style>
 </head>
 
 <body>
 
-<header>
-  <div class="container header-wrap">
-    <div class="brand">Adv. Brijesh Kumar</div>
+<header id="mainHeader" class="header-expanded">
+  <div class="header-center">
+    <img src="logo.png" alt="Logo" class="logo-large">
+    <div class="brand-large">Adv. Brijesh Kumar</div>
+  </div>
+
+  <div class="header-compact">
+    <div class="brand-left">
+      <img src="logo.png" alt="Logo" class="logo-small">
+      <span class="brand-small">Adv. Brijesh Kumar</span>
+    </div>
+
     <div class="contact-actions">
       <a href="tel:+919999999999" class="call">📞 +91 99999 99999</a>
       <a href="https://wa.me/919999999999" class="whatsapp">WhatsApp</a>
